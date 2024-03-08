@@ -57,3 +57,21 @@ INFO[0000] Signature saved to example_signature
 INFO[0000] Verifying signature...                       
 INFO[0000] Signature verified successfully
 ```
+
+base64 -i example_signature -o example_signature.base64
+
+Lk9UOVV7jgIrgugu1Iz8LtEJBQJg7EgyURDBeUtYTjMKWvrY6sCyopKgpyzjlUpiJBCOTWAnwzUho2AwAULq1gDjRVNJwEyVXSweHtfEyqXvGj4ZeA3mvUgeQlqCeG9PIy2xk9WidtsO/vC0rEmJniac8piX9p5Nu72CLs4Q4SkGW5qrS61+roUrSKgmfRuLz7Qr82Aykm1nUKDejCXVXwrOrOb7qwVHxPetWqh3aC2/ZgXiQN+FSHyqVkhF10zrp9WWnRwVu5YvTR/hlCBXINmg/D1pXnwWBxxfkqZgbmExSFe7s1jrL6fJjKosc0CrlZap11Z5m6HICS2L+GqAsQ==
+
+attacth the signature to  x-digital-signature header
+
+curl -X GET "http://localhost:8080/api/v1/xxx" -H "accept: application/json" -H "x-digital-signature: Lk9UOVV7jgIrgugu1Iz8LtEJBQJg7EgyURDBeUtYTjMKWvrY6sCyopKgpyzjlUpiJBCOTWAnwzUho2AwAULq1gDjRVNJwEyVXSweHtfEyqXvGj4ZeA3mvUgeQlqCeG9PIy2xk9WidtsO/vC0rEmJniac8piX9p5Nu72CLs4Q4SkGW5qrS61+roUrSKgmfRuLz7Qr82Aykm1nUKDejCXVXwrOrOb7qwVHxPetWqh3aC2/ZgXiQN+FSHyqVkhF10zrp9WWnRwVu5YvTR/hlCBXINmg/D1pXnwWBxxfkqZgbmExSFe7s1jrL6fJjKosc0CrlZap11Z5m6HICS2L+GqAsQ=="
+
+## Verify Signature
+
+base64 -D -i example_signature.base64 -o example_signature_sign
+
+./bin/osx/digitalsigner verifydata -f testfile.txt -p example_public_key.pem -s example_signature_sign 
+```bash
+INFO[0000] Verifying signature...                       
+INFO[0000] Signature verified successfully
+```
